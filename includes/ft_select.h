@@ -6,7 +6,7 @@
 /*   By: rbaran <rbaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 14:45:08 by rbaran            #+#    #+#             */
-/*   Updated: 2016/05/10 00:45:13 by rbaran           ###   ########.fr       */
+/*   Updated: 2016/05/11 16:04:59 by rbaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@
 # include <signal.h>
 # include <fcntl.h>
 # include <sys/ioctl.h>
+# define LEF 0x445B1B
+# define RIG 0x435B1B
+# define UP 0x415B1B
+# define DO 0x425B1B
+# define UNDER_ON 1
+# define UNDER_OFF 0
+
 
 typedef struct	s_output
 {
@@ -48,6 +55,9 @@ void	ft_printconf(t_elems *elems, int fd);
 int		ft_putchar_int(int c);
 void	ft_set_positions(t_elems *elems, t_output *size_conf);
 void	ft_movecursor(t_elems *elem);
+void	ft_underlinemode(int mode);
 void	ft_clearscreen(void);
+void	ft_savecursor(void);
+void	ft_restorecursor(void);
 
 #endif
