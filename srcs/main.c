@@ -6,16 +6,17 @@
 /*   By: rbaran <rbaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 14:44:16 by rbaran            #+#    #+#             */
-/*   Updated: 2016/05/09 22:01:23 by rbaran           ###   ########.fr       */
+/*   Updated: 2016/06/02 17:38:38 by rbaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
-int	main(int ac, char **av)
+int			main(int ac, char **av)
 {
-	int		fd;
-	t_elems	*select;
+	t_output	*output;
+	t_elems		*select;
+	int			fd;
 
 	if ((fd = ft_open()) == -1)
 		return (0);
@@ -23,9 +24,13 @@ int	main(int ac, char **av)
 		return (0);
 	if (!(select = ft_fillselect(ac, av)))
 		return (0);
-	if (ft_termios() == -1)
+	if (ft_termios(1) == -1)
 		return (0);
-	ft_managedisplay(select, fd);
-	ft_termios();
+	if ((output = ft_managedisplay(select, fd)))
+	{
+		ft_select(select, output);
+		free(output);
+	}
+	ft_termios(0);
 	return (0);
 }

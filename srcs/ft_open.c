@@ -6,7 +6,7 @@
 /*   By: rbaran <rbaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 14:56:18 by rbaran            #+#    #+#             */
-/*   Updated: 2016/05/09 15:08:19 by rbaran           ###   ########.fr       */
+/*   Updated: 2016/06/02 16:07:48 by rbaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,12 @@
 
 int	ft_open(void)
 {
-	return (open("/dev/tty", O_WRONLY));
+	char	*tty;
+	int		fd;
+
+	if (!(tty = ttyname(1)))
+		return (-1);
+	fd = open(tty, O_WRONLY);
+	free(tty);
+	return (fd);
 }

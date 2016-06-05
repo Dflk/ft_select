@@ -6,7 +6,7 @@
 /*   By: rbaran <rbaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 18:23:09 by rbaran            #+#    #+#             */
-/*   Updated: 2016/05/11 13:25:02 by rbaran           ###   ########.fr       */
+/*   Updated: 2016/06/02 17:34:49 by rbaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,35 @@ static size_t	ft_lenmax(t_elems *elems)
 	return (max);
 }
 
-void			ft_managedisplay(t_elems *elems, int fd)
+t_output		*ft_saveoutput(t_output *output)
+{
+	static t_output	*output_save = NULL;
+
+	if (output)
+	{
+		output_save = output;
+		return (NULL);
+	}
+	else
+		return (output_save);
+}
+
+t_output		*ft_managedisplay(t_elems *elems, int fd)
 {
 	struct winsize	termsize;
-	t_output		size_conf;
+	t_output		*size_conf;
 
-	if (ioctl(fd, TIOCGWINSZ, &termsize) == -1)
-		return ;
-	size_conf.len_max = (int)ft_lenmax(elems);
-	size_conf.o_cols = termsize.ws_col / (size_conf.len_max + 1);
-	size_conf.o_lines = termsize.ws_row;
-	ft_set_positions(elems, &size_conf);
-	ft_printconf(elems, fd);
+	if (ioctl(1, TIOCGWINSZ, &termsize) == -1)
+		return (0);
+	if (!(size_conf = ft_memalloc(sizeof(t_output))))
+		return (0);
+	size_conf->len_max = (int)ft_lenmax(elems);
+	size_conf->o_cols = termsize.ws_col / (size_conf->len_max + 1);
+	size_conf->o_total_cols = termsize.ws_col;
+	size_conf->header = (termsize.ws_col > 49 && termsize.ws_row > 8) ? 1 : 0;
+	size_conf->o_lines = size_conf->header ? termsize.ws_row - 8 : termsize.ws_row;
+	ft_set_positions(elems, elems, size_conf, 0);
+	size_conf->fd = fd;
+	ft_saveoutput(size_conf);
+	return (size_conf);
 }

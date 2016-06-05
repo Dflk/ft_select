@@ -6,7 +6,7 @@
 /*   By: rbaran <rbaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 22:57:54 by rbaran            #+#    #+#             */
-/*   Updated: 2016/05/09 23:05:00 by rbaran           ###   ########.fr       */
+/*   Updated: 2016/06/02 17:27:39 by rbaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,8 @@
 
 int	ft_putchar_int(int c)
 {
-	return (write(1, &c, 1));
+	t_output	*output;
+
+	output = ft_saveoutput(NULL);
+	return (write(output->fd, &c, 1));
 }

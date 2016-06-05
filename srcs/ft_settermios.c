@@ -6,19 +6,19 @@
 /*   By: rbaran <rbaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 12:01:46 by rbaran            #+#    #+#             */
-/*   Updated: 2016/05/09 22:00:15 by rbaran           ###   ########.fr       */
+/*   Updated: 2016/06/02 17:18:47 by rbaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
-int		ft_termios(void)
+int		ft_termios(int set)
 {
 	static int				mode = 0;
 	static struct termios	term_backup;
 	struct termios			term;
 
-	if (mode == 0)
+	if (set == 1 && mode == 0)
 	{
 		if (tcgetattr(0, &term_backup)
 			|| !ft_memcpy(&term, &term_backup, sizeof(struct termios)))

@@ -6,18 +6,18 @@
 /*   By: rbaran <rbaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 22:50:49 by rbaran            #+#    #+#             */
-/*   Updated: 2016/05/11 16:04:36 by rbaran           ###   ########.fr       */
+/*   Updated: 2016/06/02 16:52:07 by rbaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
-void	ft_movecursor(t_elems *elem)
+void	ft_movecursor(int posX, int posY)
 {
 	char	*res;
 
 	if ((res = tgetstr("cm", NULL)))
-		tputs(tgoto(res, elem->posX, elem->posY), 0, &ft_putchar_int);
+		tputs(tgoto(res, posX, posY), 0, &ft_putchar_int);
 }
 
 void	ft_clearscreen(void)
