@@ -6,7 +6,7 @@
 /*   By: rbaran <rbaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 18:23:09 by rbaran            #+#    #+#             */
-/*   Updated: 2016/06/02 17:34:49 by rbaran           ###   ########.fr       */
+/*   Updated: 2016/06/09 15:31:34 by rbaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ t_output		*ft_managedisplay(t_elems *elems, int fd)
 	size_conf->o_cols = termsize.ws_col / (size_conf->len_max + 1);
 	size_conf->o_total_cols = termsize.ws_col;
 	size_conf->header = (termsize.ws_col > 49 && termsize.ws_row > 8) ? 1 : 0;
-	size_conf->o_lines = size_conf->header ? termsize.ws_row - 8 : termsize.ws_row;
+	size_conf->o_lines = size_conf->header ? termsize.ws_row - 8 :
+				termsize.ws_row;
 	ft_set_positions(elems, elems, size_conf, 0);
 	size_conf->fd = fd;
 	ft_saveoutput(size_conf);

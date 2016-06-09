@@ -6,7 +6,7 @@
 /*   By: rbaran <rbaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 16:50:31 by rbaran            #+#    #+#             */
-/*   Updated: 2016/06/02 16:26:24 by rbaran           ###   ########.fr       */
+/*   Updated: 2016/06/09 11:36:04 by rbaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ t_elems			*ft_fillselect(int ac, char **av)
 	return (beg_elems);
 }
 
-void		ft_set_positions(t_elems *elems, t_elems *beg_list, t_output *size_conf, int map)
+void			ft_set_positions(t_elems *elems, t_elems *beg_list, t_output
+			*size_conf, int map)
 {
 	t_elems	*beg_elems;
 	int		i;
@@ -109,7 +110,8 @@ void		ft_set_positions(t_elems *elems, t_elems *beg_list, t_output *size_conf, i
 	elems->posX = 0;
 	elems->posY = size_conf->header ? 7 : 0;
 	elems->map = map;
-	while ((elems = elems->next) && elems != beg_elems && i < (size_conf->o_cols * size_conf->o_lines))
+	while ((elems = elems->next) && elems != beg_elems && i < (size_conf->o_cols 
+				* size_conf->o_lines))
 	{
 		if (elems == beg_list)
 			return ;

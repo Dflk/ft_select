@@ -6,7 +6,7 @@
 /*   By: rbaran <rbaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 22:47:21 by rbaran            #+#    #+#             */
-/*   Updated: 2016/06/02 16:44:42 by rbaran           ###   ########.fr       */
+/*   Updated: 2016/06/09 15:23:10 by rbaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ static void		ft_move(t_elems **elem, int index, t_output *output)
 	else if (index == 3)
 		ft_moventimes(elem, output->o_lines, 1);
 	if ((*elem)->map != map)
-		ft_printconf(ft_findstart(*elem, DISPLAY, output->header), *elem, output);
+		ft_printconf(ft_findstart(*elem, DISPLAY, output->header),
+				*elem, output);
 	ft_movecursor((*elem)->posX, (*elem)->posY);
 	ft_print(*elem, UNDER_ON, output->fd);
 }
@@ -72,13 +73,14 @@ static int	ft_scanchr(unsigned int chr, t_elems **elem, t_output *output)
 	else if (index == 4 || index == 5)
 	{
 		ft_deleteelem(elem, output->header);
-		if (!(*elem) ||
-			!(output_buf =
-				ft_managedisplay(ft_findstart((*elem), LIST, output->header), output->fd)))
+		if (!(*elem) || !(output_buf =
+			ft_managedisplay(ft_findstart((*elem), LIST, output->header),
+				output->fd)))
 			return (0);
 		ft_memcpy(output, output_buf, sizeof(t_output));
 		free(output_buf);
-		ft_printconf(ft_findstart(*elem, DISPLAY, output->header), *elem, output);
+		ft_printconf(ft_findstart(*elem, DISPLAY, output->header), *elem,
+					output);
 	}
 	else if (index == 6)
 		return (0);
@@ -92,7 +94,10 @@ void			ft_select(t_elems *elem, t_output *output)
 	unsigned int	chr;
 	int				ret_scan;
 
-	ft_printconf(elem, elem, output);
+	if (output->o_cols == 0)
+		ft_putstr_fd("\033[31mPLZ RESIZE\033[0m", output->fd);
+	else
+		ft_printconf(elem, elem, output);
 	ret_scan = 1;
 	while (ret_scan)
 	{

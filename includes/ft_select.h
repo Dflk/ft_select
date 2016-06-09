@@ -6,7 +6,7 @@
 /*   By: rbaran <rbaran@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/09 14:45:08 by rbaran            #+#    #+#             */
-/*   Updated: 2016/06/02 17:23:50 by rbaran           ###   ########.fr       */
+/*   Updated: 2016/06/09 15:29:52 by rbaran           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int			ft_termios(int set);
 int			ft_open(void);
 t_output	*ft_managedisplay(t_elems *elems, int fd);
 t_output	*ft_saveoutput(t_output *output);
+t_elems		*ft_saveelems(t_elems *elems);
 void		ft_printconf(t_elems *begin_list, t_elems *elems, t_output *output);
 void		ft_print(t_elems *elem, int underline, int fd);
 int			ft_putchar_int(int c);
@@ -78,5 +79,6 @@ void		ft_savecursor(void);
 void		ft_restorecursor(void);
 void		ft_select(t_elems *elems, t_output *output);
 void		ft_deleteelem(t_elems **elem, int header);
+void		ft_signals(int fd);
 
 #endif
